@@ -37,7 +37,7 @@
 		}
 
 		#dividk {
-			background-image: url('https://i.imgur.com/ceKdLLq.png');
+			background-image: url('https://i.imgur.com/JYlZazO.png');
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -124,4 +124,106 @@
 			transform: translate(-50%);
 			opacity: 0;
 			z-index: 10;
-			tr
+			transition: all 0.4s;
+		}
+	</style>
+</head>
+<body>
+	<div id="dividk"></div>
+	<h1 id="clienttitle">Resent Client</h1>
+	<p id="clientversion">v5.0</p>
+	<p id="progresstext">Initializing...</p>
+	<div class="ratio">Ratio Info</div>
+	<div id="meter"><div id="progress"></div></div>
+	<img id="mojang" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Mojang2020Logo.svg" alt="Mojang Logo"/>
+
+	<script src="./classes.js"></script>
+	<script>
+		let versionNum = "v5.0";
+		let hasSiteInteractionHappened = false;
+		let tooLate = false;
+		let patchNumber;
+
+		if (localStorage.getItem("isTabSettingsModEnabled") == null) {
+			localStorage.setItem("isTabSettingsModEnabled", "false");
+		}
+
+		if (localStorage.getItem("isTabSettingsModEnabled") === "true") {
+			document.title = localStorage.getItem("tabTitle") || "Resent Client";
+			document.getElementById("favicon").href = localStorage.getItem("imageBase64") || "favicon.png";
+		}
+
+		document.addEventListener("click", () => {
+			hasSiteInteractionHappened = true;
+		});
+
+		window.addEventListener("DOMContentLoaded", () => {
+			setTimeout(() => {
+				if (!tooLate) {
+					document.querySelector(".ratio").classList.add("show");
+				}
+			}, 2000);
+		});
+
+		function setBarProg(event, epkSize) {
+			let percent = Math.round((event.loaded / epkSize) * 10000) / 100;
+			let progressMB = Math.round(event.loaded / 1024 / 1024);
+			let sizeMB = Math.round(epkSize / 1024 / 1024);
+			document.getElementById("progress").style.width = (percent + 3.5) + "%";
+			document.getElementById("progresstext").innerText = `${percent}% (${progressMB}MB / ${sizeMB}MB)`;
+		}
+
+		function enableClick() {
+			if (hasSiteInteractionHappened) {
+				loading();
+				clearInterval(interval);
+			}
+		}
+
+		let interval;
+
+		function enable() {
+			document.getElementById("progresstext").innerText = "Click anywhere to start Resent Client v5.0!";
+			document.getElementById("clienttitle").style.top = "3vh";
+			document.getElementById("clienttitle").style.fontSize = "10vw";
+			document.getElementById("clientversion").style.left = "81vw";
+			document.getElementById("clientversion").style.top = "10vh";
+			document.getElementById("clientversion").style.fontSize = "3.5vw";
+			document.getElementById("progresstext").style.top = "3vh";
+			interval = setInterval(enableClick, 10);
+		}
+
+		function loading() {
+			document.getElementById("clienttitle").style.fontSize = "8vw";
+			document.getElementById("clienttitle").style.top = "25vh";
+			document.getElementById("clientversion").style.left = "74vw";
+			document.getElementById("clientversion").style.top = "31vh";
+			document.getElementById("clientversion").style.fontSize = "2.5vw";
+			document.getElementById("progresstext").style.top = "30vh";
+			document.getElementById("progresstext").innerText = "Loading Resent " + versionNum;
+		}
+
+		function showMojang() {
+			document.getElementById("dividk").style.backgroundColor = "#f0323e";
+			document.getElementById("clienttitle").style.opacity = "0";
+			document.getElementById("clientversion").style.opacity = "0";
+			document.getElementById("mojang").style.opacity = "1";
+			document.getElementById("progresstext").style.color = "gray";
+		}
+
+		function die2() {
+			document.getElementById("progresstext").style.opacity = "0";
+			const mojang = document.getElementById("mojang");
+			mojang.style.top = "50vh";
+			mojang.style.transform = "translate(-50%, -50%)";
+			setTimeout(() => {
+				mojang.style.width = "135vw";
+				document.getElementById("dividk").style.opacity = "0";
+				setTimeout(() => {
+					document.getElementById("dividk").style.display = "none";
+				}, 200);
+			}, 500);
+		}
+	</script>
+</body>
+</html>
