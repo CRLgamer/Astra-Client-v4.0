@@ -232,52 +232,19 @@
           document.getElementById("dividk").style.opacity = "0";
           setTimeout(() => {
             document.getElementById("dividk").style.display = "none";
+            loadGame();  // Start loading the game
           }, 200);
         }, 500);
       }
 
-      function returnHasSiteInteractionHappened() {
-        return hasSiteInteractionHappened;
-      }
-
-      function setFavicon() {
-        let inputElem = document.createElement("input");
-        inputElem.type = "file";
-        inputElem.multiple = false;
-        inputElem.accept = ".png, .jpg, .jpeg, .webp";
-        inputElem.addEventListener("change", handleFileSelect, false);
-        inputElem.click();
-      }
-
-      function handleFileSelect(evt) {
-        var files = evt.target.files;
-        for (var i = 0, f; f = files[i]; i++) {
-          if (!f.type.match('image.*')) {
-            continue;
-          }
-          var reader = new FileReader();
-          reader.onload = (function(theFile) {
-            return function(e) {
-              localStorage.setItem("imageBase64", e.target.result);
-              document.getElementById("favicon").href = e.target.result;
-            };
-          })(f);
-          reader.readAsDataURL(f);
-        }
-      }
-
-      function setTitle() {
-        let title = prompt("Type Tab Title here:");
-        localStorage.setItem("tabTitle", title);
-        document.title = title;
-      }
-
-      function toggleTabSettingsMod(isEnabled) {
-        localStorage.setItem("isTabSettingsModEnabled", isEnabled.toString());
-        if (!isEnabled) {
-          document.title = "Resent Client";
-          document.getElementById("favicon").href = "favicon.png";
-        }
+      function loadGame() {
+        // Simulate game loading (e.g., by embedding an iframe)
+        let iframe = document.createElement('iframe');
+        iframe.src = 'https://example.com/game';  // Replace with the actual game URL
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        iframe.frameBorder = '0';
+        document.body.appendChild(iframe);
       }
     </script>
   </head>
