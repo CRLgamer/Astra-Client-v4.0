@@ -1,141 +1,294 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Resent 1.8" />
-		<meta name="keywords" content="eaglercraft, eaglercraftx, minecraft, 1.8, 1.8.8, resent, hooman, kone, nitwit, lax1dude" />
-		<title>Resent Client v5.0</title>
-		<meta property="og:locale" content="en-US" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Resent 1.8" />
-		<meta property="og:description" content="Resent 1.8" />
-		<link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon"/>
-		<script type="text/javascript" src="./classes.js"></script>
-		<style>
-			html {
-				font-family: sans-serif;
-				text-align: center;
-			}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Resent 1.8" />
+    <meta name="keywords" content="eaglercraft, eaglercraftx, minecraft, 1.8, 1.8.8, resent, hooman, kone, nitwit, lax1dude" />
+    <title>Resent Client v5.0</title>
+    <meta property="og:locale" content="en-US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Resent 1.8" />
+    <meta property="og:description" content="Resent 1.8" />
+    <link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon" />
+    <script type="text/javascript" src="./classes.js"></script>
+    <style>
+      html {
+        font-family: sans-serif;
+        text-align: center;
+        margin: 0;
+        height: 100%;
+      }
 
-			* {
-				-webkit-tap-highlight-color: transparent;
-				user-select: none;
-				-webkit-user-select: none;
-			}
+      * {
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+      }
 
-			#progresstext {
-				font-weight: bold;
-				top: 30vh;
-				position: relative;
-				font-size: 1.75vw;
-				transition: all 0.4s;
-			}
+      body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+      }
 
-			#clienttitle {
-				position: relative;
-				top: 25vh;
-				font-size: 8vw;
-				font-family: Aller;
-				transition: all 0.4s;
-				color: white;
-			}
+      #dividk {
+        background-image: url('https://i.imgur.com/ceKdLLq.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
 
-			#clientversion {
-				position: absolute;
-				top: 31vh;
-				left: 74vw;
-				font-size: 2.5vw;
-				color: gray;
-				font-family: Aller;
-				transition: all 0.4s;
-			}
+      #clienttitle {
+        position: relative;
+        top: 25vh;
+        font-size: 8vw;
+        font-family: Aller, sans-serif;
+        color: white;
+        transition: all 0.4s;
+      }
 
-			#progress {
-				width: 10%;
-				height: 100%;
-				display: block;
-				border-radius: 10vw;
-				background-color: white;
-				transition: all 0.5s;
-				transform: scaleX(1.01);
-			}
+      #clientversion {
+        position: absolute;
+        top: 31vh;
+        left: 74vw;
+        font-size: 2.5vw;
+        color: gray;
+        font-family: Aller, sans-serif;
+        transition: all 0.4s;
+      }
 
-			.ratio {
-				position: relative;
-				top: 13vh;
-				font-size: 2vh;
-				font-family: Aller;
-				opacity: 0;
-				transition: opacity 0.4s;
-				color: white;
-			}
+      #progresstext {
+        font-weight: bold;
+        top: 30vh;
+        position: relative;
+        font-size: 1.75vw;
+        transition: all 0.4s;
+        color: white;
+      }
 
-			.ratio.show {
-				opacity: 1;
-			}
+      #progress {
+        width: 10%;
+        height: 100%;
+        display: block;
+        border-radius: 10vw;
+        background-color: white;
+        transition: all 0.5s;
+        transform: scaleX(1.01);
+      }
 
-			#meter {
-				width: 80vw;
-				margin: auto;
-				top: 28vh;
-				height: 20px;
-				position: relative;
-				border: 5px solid white;
-				border-radius: 20vw;
-			}
+      .ratio {
+        position: relative;
+        top: 13vh;
+        font-size: 2vh;
+        font-family: Aller, sans-serif;
+        opacity: 0;
+        transition: opacity 0.4s;
+        color: white;
+      }
 
-			#dividk {
-				background-image: url('https://i.imgur.com/ceKdLLq.png'); /* Replace with your image URL */
-				background-size: cover;
-				background-position: center;
-				background-repeat: no-repeat;
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				width: 100vw;
-				height: 100vh;
-			}
+      .ratio.show {
+        opacity: 1;
+      }
 
-			#mojang {
-				position: absolute;
-				left: 50vw;
-				top: 35vh;
-				width: 50vw;
-				filter: invert(100%);
-				transform: translate(-50%);
-				opacity: 0;
-			}
+      #meter {
+        width: 80vw;
+        margin: auto;
+        top: 28vh;
+        height: 20px;
+        position: relative;
+        border: 5px solid white;
+        border-radius: 20vw;
+      }
 
-			#toggleControls:active {
-				background-color: white;
-			}
-		</style>
-		<script type="text/javascript">
-			// Your existing JavaScript functions here
+      #mojang {
+        position: absolute;
+        left: 50vw;
+        top: 35vh;
+        width: 50vw;
+        filter: invert(100%);
+        transform: translate(-50%);
+        opacity: 0;
+      }
 
-			// Ensure that the images load and all necessary styles are applied
-			window.addEventListener('load', () => {
-				// Ensure the background and images are displayed correctly
-				document.getElementById("dividk").style.backgroundImage = "url('https://i.imgur.com/ceKdLLq.png')";
-				document.getElementById("mojang").src = "https://i.imgur.com/MrUgGBL.png"; // Make sure the image URL is correct
-			});
-		</script>
-	</head>
-	<body style="margin:0px;width:100vw;height:100vh;overflow:hidden; user-select: none; -webkit-tap-highlight-color: transparent;" id="game_frame">
-		<div id="dividk">
-			<h1 id="clienttitle">Resent Client</h1>
-			<p class="ratio"></p>
-			<img id="mojang" src="https://i.imgur.com/MrUgGBL.png" alt="Mojang Logo">
-			<h2 id="clientversion">4.0</h2>
-			<p id="progresstext" style="color:white">0%</p>
-			<div id="meter">
-				<div style="width: 0%" id="progress"></div>
-			</div>
-		</div>
+      #keyboardButton,
+      #fakeKeyboard,
+      #toggleControls {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript">
+      let versionNum = "v5.0";
+      let version = "v5.0";
+      let hasSiteInteractionHappened = false;
+      let tooLate = false;
+      let patchNumber;
 
-		<button id="keyboardButton" style="display:none; position: absolute; left: 85vw; top: 0px; font-size: 15px; height: 50px; width: 100px; -webkit-tap-highlight-color: transparent;">Open Keyboard</button>
-		<input type="text" id="fakeKeyboard" style="display:none; position: absolute; top: 0px; left: 85vw; width: 100px; height: 50px; opacity: 0; -webkit-tap-highlight-color: transparent;">
-		<button id="toggleControls" style="display:none; position: absolute; left: 85vw; top: 50px; font-size: 15px; height: 50px; width: 100px; -webkit-tap-highlight-color: transparent;">Toggle Controls</button>
-	</body>
+      if (localStorage.getItem("isTabSettingsModEnabled") == null) {
+        localStorage.setItem("isTabSettingsModEnabled", "false");
+      }
+
+      if (localStorage.getItem("isTabSettingsModEnabled") === "true") {
+        document.title = localStorage.getItem("tabTitle");
+        document.getElementById("favicon").href = localStorage.getItem("imageBase64");
+      }
+
+      document.addEventListener("click", () => {
+        hasSiteInteractionHappened = true;
+      });
+
+      window.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(() => {
+          if (!tooLate) {
+            document.getElementsByClassName("ratio")[0].className = "ratio show";
+          }
+        }, 2000);
+      });
+
+      function setVersion() {
+        document.getElementById("clientversion").innerText = version;
+        versionNum = version;
+      }
+
+      function setBarProg(event, epkSize) {
+        let progress = Math.round(event.loaded / 1024 / 1024);
+        let size = Math.round(epkSize / 1024 / 1024);
+        document.getElementById("progress").style.width = (Math.round(progress / size * 100) + 3.5) + "%";
+        document.getElementById("progresstext").innerText = Math.round(event.loaded / epkSize * 10000) / 100 + "% (" + Math.round(event.loaded / 1024 / 1024) + "MB / " + Math.round(epkSize / 1024 / 1024) + "MB)";
+      }
+
+      function die() {
+        document.getElementById("meter").style.display = "none";
+        tooLate = true;
+        document.getElementsByClassName("ratio")[0].className = "ratio";
+        setTimeout(() => {
+          document.getElementsByClassName("ratio")[0].style.display = "none";
+        }, 400);
+        document.getElementById("progresstext").innerText = "Loading stuff... don't have a slow device.";
+      }
+
+      let interval;
+
+      function enable() {
+        document.getElementById("progresstext").innerText = "Click anywhere on the screen to start Resent Client v5.0! Made by CRLgamer.";
+        let title = document.getElementById("clienttitle");
+        let versionText = document.getElementById("clientversion");
+        title.style.fontSize = "10vw";
+        versionText.style.left = "81vw";
+        versionText.style.top = "10vh";
+        title.style.top = "3vh";
+        versionText.style.fontSize = "3.5vw";
+        document.getElementById("progresstext").style.top = "3vh";
+        interval = setInterval(() => {
+          enableClick();
+        }, 10);
+      }
+
+      function enableClick() {
+        if (hasSiteInteractionHappened) {
+          loading();
+          clearInterval(interval);
+        }
+      }
+
+      function loading() {
+        let title = document.getElementById("clienttitle");
+        let versionText = document.getElementById("clientversion");
+        title.style.fontSize = "8vw";
+        versionText.style.left = "74vw";
+        versionText.style.top = "31vh";
+        versionText.style.fontSize = "2.5vw";
+        title.style.top = "25vh";
+        document.getElementById("progresstext").style.top = "30vh";
+        document.getElementById("progresstext").innerText = "Loading Resent " + versionNum;
+      }
+
+      function showMojang() {
+        document.getElementById("dividk").style.transition = "background-color 0.2s";
+        document.getElementById("dividk").style.backgroundColor = "#f0323e";
+        document.getElementById("clienttitle").style.transition = "opacity 0.2s";
+        document.getElementById("clienttitle").style.opacity = "0";
+        document.getElementById("clientversion").style.transition = "opacity 0.2s";
+        document.getElementById("clientversion").style.opacity = "0";
+        document.getElementById("mojang").style.opacity = "1";
+        document.getElementById("progresstext").style.color = "gray";
+      }
+
+      function die2() {
+        document.getElementById("progresstext").style.transition = "opacity 0.4s";
+        document.getElementById("progresstext").style.opacity = "0";
+        document.getElementById("mojang").style.transition = "all 0.4s";
+        document.getElementById("mojang").style.top = "50vh";
+        document.getElementById("mojang").style.transform = "translate(-50%, -50%)";
+        setTimeout(() => {
+          document.getElementById("mojang").style.transition = "all 0.7s";
+          document.getElementById("mojang").style.width = "135vw";
+          document.getElementById("dividk").style.transition = "opacity 0.4s";
+          document.getElementById("dividk").style.opacity = "0";
+          setTimeout(() => {
+            document.getElementById("dividk").style.display = "none";
+          }, 200);
+        }, 500);
+      }
+
+      function returnHasSiteInteractionHappened() {
+        return hasSiteInteractionHappened;
+      }
+
+      function setFavicon() {
+        let inputElem = document.createElement("input");
+        inputElem.type = "file";
+        inputElem.multiple = false;
+        inputElem.accept = ".png, .jpg, .jpeg, .webp";
+        inputElem.addEventListener("change", handleFileSelect, false);
+        inputElem.click();
+      }
+
+      function handleFileSelect(evt) {
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+          if (!f.type.match('image.*')) {
+            continue;
+          }
+          var reader = new FileReader();
+          reader.onload = (function(theFile) {
+            return function(e) {
+              localStorage.setItem("imageBase64", e.target.result);
+              document.getElementById("favicon").href = e.target.result;
+            };
+          })(f);
+          reader.readAsDataURL(f);
+        }
+      }
+
+      function setTitle() {
+        let title = prompt("Type Tab Title here:");
+        localStorage.setItem("tabTitle", title);
+        document.title = title;
+      }
+
+      function toggleTabSettingsMod(isEnabled) {
+        localStorage.setItem("isTabSettingsModEnabled", isEnabled.toString());
+        if (!isEnabled) {
+          document.title = "Resent Client";
+          document.getElementById("favicon").href = "favicon.png";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="dividk">
+      <div id="clienttitle">Resent 1.8</div>
+      <div id="clientversion">v5.0</div>
+      <div id="progresstext">Loading...</div>
+      <div id="progress"></div>
+      <div id="meter"><div id="progress"></div></div>
+      <img id="mojang" src="https://i.imgur.com/MrUgGBL.png" />
+    </div>
+  </body>
 </html>
