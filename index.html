@@ -38,6 +38,7 @@
 
 			#clienttitle {
 				position: relative;
+    				z-index: 9999;
 				top: 25vh;
 				font-size: 8vw;
                 font-family: Aller;
@@ -46,7 +47,7 @@
 			}
 
 			#clientversion {
-				position: absolute;
+				position: relative;
 				top: 31vh;
                 left: 74vw;
 				font-size: 2.5vw;
@@ -67,6 +68,7 @@
 
 			.ratio {
 				position: relative;
+    				z-index: 9999;
 				top: 13vh;
 				font-size: 2vh;
 				font-family: Aller;
@@ -93,7 +95,8 @@
 			    background-size: cover;
 			    background-position: center;
 			    background-repeat: no-repeat;
-			    position: absolute;
+			    position: fixed;
+    			    z-index: 9998;
 			    top: 0px;
 			    left: 0px;
 			    width: 100vw;
@@ -102,6 +105,7 @@
 
             #mojang {
                 position: fixed;
+    		z-index: 9999;
 	    	top: 0;
 	    	left: 0;
 	    	width: 100vw;
